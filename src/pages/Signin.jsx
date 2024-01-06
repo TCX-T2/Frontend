@@ -23,6 +23,7 @@ const Signin = () => {
           window.location.href = "/dashboard";
         })
         .catch((error) => {
+          console.log(error.response);
           if (error.response.status === 401) {
             alert("Email ou mot de passe incorrect");
           }
