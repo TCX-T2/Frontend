@@ -1,5 +1,5 @@
 import React from "react";
-import NavbarUser from "../components/NavbarUser";
+import NavbarUser from "./NavbarUser";
 
 const Patient = () => {
   return (

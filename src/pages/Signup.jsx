@@ -33,6 +33,8 @@ const Signup = () => {
         .then((response) => {
           console.log(response.data); // Handle successful response here
           localStorage.setItem("token", response.data.accessToken);
+          localStorage.setItem("Nom", response.data.Nom);
+          localStorage.setItem("Speciality", response.data.Speciality);
           navigate("/dashboard", { replace: true });
         })
         .catch((error) => {
@@ -54,7 +56,7 @@ const Signup = () => {
       <div className=" flex flex-col items-center justify-center w-11/12">
         <div className=" rounded-xl w-[32rem]">
           <h2 className="text-4xl font-bold mb-5 text-center">
-            Bienvenu à MedHub
+            Bienvenu à MedFlow
           </h2>
           <h2 className="text-xl font-semibold mb-5 text-center">
             Creer un compte

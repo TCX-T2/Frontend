@@ -3,7 +3,7 @@ import NavbarUser from "../components/NavbarUser";
 
 const Profile = () => {
   return (
-    <div className="bg-primary min-h-full h-screen overflow-hidden">
+    <div className=" min-h-full h-screen overflow-hidden">
       <div className="bg-gradient-to-r from-white/20 to-tertiary/20 min-h-full">
         <div className="px-16 text-white">
           <NavbarUser />

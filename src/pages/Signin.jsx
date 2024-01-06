@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
+import axios from "../config/axiosConfig.js";
 
 const Signin = () => {
   const formik = useFormik({
@@ -15,11 +15,12 @@ const Signin = () => {
     }),
     onSubmit: (values) => {
       axios
-        .post("/signin", values)
+        .post("users/signin", values)
         .then((response) => {
           console.log(response.data); // Handle successful response here
           localStorage.setItem("token", response.data.accessToken);
-          localStorage.setItem("roles", response.data.roles);
+          localStorage.setItem("Nom", response.data.Nom);
+          localStorage.setItem("Speciality", response.data.Speciality);
           window.location.href = "/dashboard";
         })
         .catch((error) => {
@@ -49,7 +50,7 @@ const Signin = () => {
       <div className=" flex flex-col items-center justify-center w-11/12">
         <div className=" rounded-xl w-[27rem]">
           <h2 className="text-4xl font-bold mb-5 text-center">
-            Bienvenu à MedHub
+            Bienvenu à MedFlow
           </h2>
           <h2 className="text-xl font-semibold mb-5 text-center">
             Connectez-vous
