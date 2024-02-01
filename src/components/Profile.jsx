@@ -1,9 +1,9 @@
 import React from "react";
-import NavbarUser from "./Home/NavbarUser";
+import { motion } from "framer-motion";
 
 const Profile = () => {
   return (
-    <div className="flex flex-col gap-6 p-10 px-20 w-3/5">
+    <form className="flex flex-col gap-6 p-10 px-20 w-4/5 m-auto">
       <div className="flex gap-10 items-center justify-start">
         <div className="flex flex-col gap-5">
           <label htmlFor="Nom">Nom</label>
@@ -12,7 +12,7 @@ const Profile = () => {
             name="Nom"
             placeholder="Nom"
             value={"Einstein"}
-            className=" border-[1.5px] border-neutral-300 w-[17rem] rounded-md p-6 h-9 outline-none focus:outline-none focus:ring-2 focus:ring-secondary"
+            className=" border-[1.5px] border-neutral-300 w-[24.5rem] rounded-md p-6 h-9 outline-none focus:outline-none focus:ring-2 focus:ring-secondary"
           />
         </div>
         <div className="flex flex-col gap-5">
@@ -22,7 +22,7 @@ const Profile = () => {
             name="Prenom"
             placeholder="Prenom"
             value={"Albert"}
-            className=" border-[1.5px] border-neutral-300 w-[17rem] rounded-md p-6 h-9 outline-none focus:outline-none focus:ring-2 focus:ring-secondary"
+            className=" border-[1.5px] border-neutral-300 w-[24.5rem] rounded-md p-6 h-9 outline-none focus:outline-none focus:ring-2 focus:ring-secondary"
           />
         </div>
       </div>
@@ -44,7 +44,7 @@ const Profile = () => {
             name="numerotel"
             placeholder="numerotel"
             value={"0561002332"}
-            className=" border-[1.5px] border-neutral-300 w-[17rem] rounded-md p-6 h-9 outline-none focus:outline-none focus:ring-2 focus:ring-secondary"
+            className=" border-[1.5px] border-neutral-300 w-[24.5rem] rounded-md p-6 h-9 outline-none focus:outline-none focus:ring-2 focus:ring-secondary"
           />
         </div>
         <div className="flex flex-col gap-5">
@@ -54,7 +54,7 @@ const Profile = () => {
             name="Specialite"
             placeholder="Specialite"
             value={"Chirugien"}
-            className=" border-[1.5px] border-neutral-300 w-[17rem] rounded-md p-6 h-9 outline-none focus:outline-none focus:ring-2 focus:ring-secondary"
+            className=" border-[1.5px] border-neutral-300 w-[24.5rem] rounded-md p-6 h-9 outline-none focus:outline-none focus:ring-2 focus:ring-secondary"
           />
         </div>
       </div>
@@ -68,7 +68,25 @@ const Profile = () => {
           className=" border-[1.5px] border-neutral-300 w-full rounded-md p-6 h-9 outline-none focus:outline-none focus:ring-2 focus:ring-secondary"
         />
       </div>
-    </div>
+      <div className="flex gap-10 items-center justify-between">
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => (window.location.href = "/signup")}
+          className="border-2 border-neutral-300 px-10 py-2 w-fit rounded-xl font-semibold text-lg"
+        >
+          Changer le mot de passe
+        </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => (window.location.href = "/signup")}
+          className="bg-secondary px-10 py-2 text-white w-fit rounded-xl font-semibold text-lg"
+        >
+          Valider les mofiications
+        </motion.button>
+      </div>
+    </form>
   );
 };
 
