@@ -4,7 +4,7 @@ const pageActive = window.location.pathname;
 
 // Add active class based on the current page
 const getClassNames = (page) => {
-  return page === pageActive ? "bg-secondary bg-opacity-10" : "";
+  return page === pageActive ? "bg-secondary bg-opacity-10 text-secondary" : "";
 };
 
 const getCurrentWord = (page) => {
@@ -13,49 +13,57 @@ const getCurrentWord = (page) => {
 
 const SideBar = () => {
   return (
-    <div className="h-full flex flex-col items-center justify-between w-1/5 border-r-2 py-10">
+    <div className="h-full flex flex-col items-center justify-between w-1/5 border-r-2 py-6">
       <div className=" flex flex-col gap-20 w-full px-10">
-        <h2 className="text-4xl font-bold mb-5 text-center">MedFlow</h2>
-        <ul className="flex flex-col gap-5 text-xl font-semibold mb-5 text-start">
-          <li
-            className={`rounded-xl w-full py-3 px-5 hover:bg-secondary hover:bg-opacity-10 transition-all duration-200
+        <h2 className="text-4xl font-bold mb-5 text-center font-racingSansOne text-secondary flex gap-5 items-center justify-center">
+        <img
+            onClick={() => (window.location.href = "/")}
+            src="ico.svg"
+            alt="logo_MEDHUB"
+            className="cursor-pointer"
+          />
+          MedFlow
+        </h2>
+        <ul className="flex flex-col gap-8 text-xl font-semibold mb-5 text-start">
+          <a href="/dashboard">
+            <li
+              className={`rounded-xl w-full py-3 px-5 hover:bg-secondary hover:bg-opacity-10 transition-all duration-200 flex gap-4
           ${getClassNames("/dashboard")}`}
-            id="dashboard"
-          >
-            <a href="/dashboard" className="flex gap-4">
+              id="dashboard"
+            >
               <img
                 src={`icons/dashboard${getCurrentWord("/dashboard")}.svg`}
                 alt="dashboard icon"
               />
               <p>Dashboard</p>
-            </a>
-          </li>
-          <li
-            id="profile"
-            className={`rounded-xl w-full py-3 px-5 hover:bg-secondary hover:bg-opacity-10 transition-all duration-200
+            </li>
+          </a>
+          <a href="/profile">
+            <li
+              id="profile"
+              className={`rounded-xl w-full py-3 px-5 hover:bg-secondary hover:bg-opacity-10 transition-all duration-200 flex gap-4
           ${getClassNames("/profile")}`}
-          >
-            <a href="/profile" className="flex gap-4">
+            >
               <img
                 src={`icons/profil${getCurrentWord("/profil")}.svg`}
                 alt="profile icon"
               />
               <p>Profile</p>
-            </a>
-          </li>
-          <li
-            id="historique"
-            className={`rounded-xl w-full py-3 px-5 hover:bg-secondary hover:bg-opacity-10 transition-all duration-200
+            </li>{" "}
+          </a>
+          <a href="/historique">
+            <li
+              id="historique"
+              className={`rounded-xl w-full py-3 px-5 hover:bg-secondary hover:bg-opacity-10 transition-all duration-200 flex gap-4
           ${getClassNames("/historique")}`}
-          >
-            <a href="/historique" className="flex gap-4">
+            >
               <img
                 src={`icons/historique${getCurrentWord("/historique")}.svg`}
                 alt="historique icon"
               />
               <p>Historique</p>
-            </a>
-          </li>
+            </li>
+          </a>
         </ul>
       </div>
 

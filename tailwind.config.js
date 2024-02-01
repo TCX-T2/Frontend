@@ -8,6 +8,9 @@ export default {
         secondary: "#027CC0",
         tertiary: "#004DE1",
       },
+      fontFamily: {
+        racingSansOne: ["Racing Sans One", "sans-serif"],
+      },
     },
   },
   plugins: [],
