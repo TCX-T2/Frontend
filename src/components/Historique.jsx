@@ -46,11 +46,8 @@ const Historique = () => {
   };
 
   return (
-    <div className=" flex flex-col w-4/5">
-      <NavbarUser />
-      <div className="flex flex-col gap-y-5">
-        <h3 className="font-bold text-4xl m-10 mb-17">Historique</h3>
-        <ul className="flex flex-col self-start gap-y-4 overflow-y-scroll h-96 w-full">
+      <div className="flex flex-col gap-y-5 p-10 h-[86vh]">
+        <ul className="flex flex-col self-start gap-y-4 overflow-y-scroll h-full w-3/4 custom-scroll shadow-lg rounded-lg py-5">
           {historique.map((element) => (
             <div className="" key={element._id}>
               <li className="font-semibold text-lg ml-10">
@@ -76,7 +73,6 @@ const Historique = () => {
           ))}
         </ul>
       </div>
-    </div>
   );
 };
 

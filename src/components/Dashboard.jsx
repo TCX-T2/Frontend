@@ -46,8 +46,6 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className=" flex flex-col w-4/5">
-      <NavbarUser />
       <div className="flex flex-col items-start justify-start w-full h-full gap-20 px-10 py-10">
         <div className="flex flex-col gap-20 w-full">
           <div>
@@ -156,7 +154,6 @@ const Dashboard = () => {
           </table>
         </div>
       </div>
-    </div>
   );
 };
 

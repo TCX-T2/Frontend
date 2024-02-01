@@ -10,6 +10,7 @@ export default {
       },
       fontFamily: {
         racingSansOne: ["Racing Sans One", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
       },
     },
   },
