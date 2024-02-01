@@ -1,5 +1,5 @@
 import React from "react";
-import NavbarUser from "../components/NavbarUser";
+import NavbarUser from "../components/Home/NavbarUser";
 import axios from "../config/axiosConfig.js";
 
 const Dashboard = () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import NavbarUser from "./NavbarUser";
+import NavbarUser from "./Home/NavbarUser";
 
 const Profile = () => {
   return (
