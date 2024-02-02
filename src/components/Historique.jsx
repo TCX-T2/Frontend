@@ -1,13 +1,12 @@
 import React from "react";
-import NavbarUser from "../components/Home/NavbarUser";
-import axios from "../config/axiosConfig.js";
+import axiosInstance from "../config/axiosConfig.js";
 
 const Historique = () => {
   const token = localStorage.getItem("token");
   const [historique, setHistorique] = React.useState([]);
 
   const loadHistorique = () => {
-    axios
+    axiosInstance
       .get("/history/all", { headers: { "x-access-token": token } })
       .then((response) => {
         console.log("Historique:", response.data);

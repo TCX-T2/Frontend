@@ -20,7 +20,11 @@ const Signin = () => {
           console.log(response.data); // Handle successful response here
           localStorage.setItem("token", response.data.accessToken);
           localStorage.setItem("Nom", response.data.Nom);
-          localStorage.setItem("Speciality", response.data.Speciality);
+          localStorage.setItem("Prenom", response.data.Prenom);
+          localStorage.setItem("Username", response.data.Username);
+          localStorage.setItem("mail", response.data.mail);
+          localStorage.setItem("PhoneNumber", response.data.PhoneNumber);
+          localStorage.setItem("Specialite", response.data.Specialite);
           window.location.href = "/dashboard";
         })
         .catch((error) => {

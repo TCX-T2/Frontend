@@ -1,6 +1,5 @@
 import React from "react";
-import NavbarUser from "../components/Home/NavbarUser";
-import axios from "../config/axiosConfig.js";
+import axiosInstance from "../config/axiosConfig.js";
 
 const Dashboard = () => {
   const [patients, setPatients] = React.useState([]);
@@ -29,7 +28,7 @@ const Dashboard = () => {
   };
 
   const loadPatients = () => {
-    axios
+    axiosInstance
       .get("/patients/all", { headers: { "x-access-token": token } })
       .then((response) => {
         console.log("Patients:", response.data);
@@ -122,7 +121,7 @@ const Dashboard = () => {
                       className="mr-5"
                       onClick={(e) => {
                         e.stopPropagation();
-                        axios
+                        axiosInstance
                           .delete(`/patients/${patient._id}`, {
                             headers: { "x-access-token": token },
                           })

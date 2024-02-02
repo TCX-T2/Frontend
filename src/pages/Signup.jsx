@@ -13,7 +13,7 @@ const Signup = () => {
     mail: Yup.string().email("Invalid email").required("Email is required"),
     PhoneNumber: Yup.string().required("Phone number is required"),
     Username: Yup.string().required("Address is required"),
-    Speciality: Yup.string().required("Field of study is required"),
+    Specialite: Yup.string().required("Field of study is required"),
     password: Yup.string().required("Password is required"),
   });
 
@@ -23,7 +23,7 @@ const Signup = () => {
       email: "",
       PhoneNumber: "",
       Username: "",
-      Speciality: "",
+      Specialite: "",
       password: "",
     },
     validationSchema: validationSchema,
@@ -34,7 +34,11 @@ const Signup = () => {
           console.log(response.data); // Handle successful response here
           localStorage.setItem("token", response.data.accessToken);
           localStorage.setItem("Nom", response.data.Nom);
-          localStorage.setItem("Speciality", response.data.Speciality);
+          localStorage.setItem("Prenom", response.data.Prenom);
+          localStorage.setItem("Username", response.data.Username);
+          localStorage.setItem("mail", response.data.mail);
+          localStorage.setItem("PhoneNumber", response.data.PhoneNumber);
+          localStorage.setItem("Specialite", response.data.Specialite);
           navigate("/dashboard", { replace: true });
         })
         .catch((error) => {
@@ -123,11 +127,11 @@ const Signup = () => {
                 <input
                   type="text"
                   className="mt-2 border border-gray-400 rounded-md p-5 h-9 w-100 "
-                  name="Speciality"
-                  id="Speciality"
+                  name="Specialite"
+                  id="Specialite"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.Speciality}
+                  value={formik.values.Specialite}
                 />
               </div>
             </div>

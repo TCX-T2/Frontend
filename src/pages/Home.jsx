@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Dashboard from "../components/Dashboard.jsx";
-import Calendar from "../components/Calendar.jsx";
 import Profile from "../components/Profile.jsx";
 import Historique from "../components/Historique.jsx";
 import AddPatient from "../components/AddPatient.jsx";
@@ -25,8 +24,6 @@ const Home = () => {
     switch (pageActive) {
       case "/dashboard":
         return <Dashboard />;
-      case "/calendar":
-        return <Calendar />;
       case "/profile":
         return <Profile />;
       case "/historique":
