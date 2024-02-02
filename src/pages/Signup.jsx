@@ -38,7 +38,7 @@ const Signup = () => {
           localStorage.setItem("Username", response.data.Username);
           localStorage.setItem("mail", response.data.mail);
           localStorage.setItem("PhoneNumber", response.data.PhoneNumber);
-          localStorage.setItem("Specialite", response.data.Specialite);
+          localStorage.setItem("Specialite", response.data.Speciality);
           navigate("/dashboard", { replace: true });
         })
         .catch((error) => {
