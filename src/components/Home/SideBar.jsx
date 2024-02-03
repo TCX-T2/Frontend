@@ -42,10 +42,10 @@ const SideBar = () => {
             <li
               id="profile"
               className={`rounded-xl w-full py-3 px-5 hover:bg-secondary hover:bg-opacity-10 transition-all duration-200 flex gap-4
-          ${getClassNames("/profile")}`}
+          ${getClassNames("/profile")} ${getClassNames("/password")}`}
             >
               <img
-                src={`icons/profil${getCurrentWord("/profil")}.svg`}
+                src={`icons/profil${getCurrentWord("/profile")}${getCurrentWord("/password")}.svg`}
                 alt="profile icon"
               />
               <p>Profile</p>

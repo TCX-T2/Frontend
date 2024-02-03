@@ -29,8 +29,8 @@ const NavbarUser = () => {
     switch (pageActive) {
       case "/dashboard":
         return "Dashboard";
-      case "/calendar":
-        return "Calendrier";
+      case "/password":
+        return "Changer mot de passe";
       case "/profile":
         return "Mon profile";
       case "/historique":

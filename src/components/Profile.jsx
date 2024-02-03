@@ -1,8 +1,9 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axiosInstance from "../config/axiosConfig.js";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Profile = () => {
   // recover the user's information from the localStorage
@@ -107,6 +108,17 @@ const Profile = () => {
           localStorage.setItem("PhoneNumber", values.numerotel);
           localStorage.setItem("Specialite", values.Specialite);
           localStorage.setItem("Username", values.utilisateur);
+
+          // show a message to the user that the modification is done successfully
+          toast.success("Les modifications sont enregistrées avec succès", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
         })
         .catch((error) => {
           console.error(error);
@@ -119,6 +131,7 @@ const Profile = () => {
       onSubmit={formik.handleSubmit}
       className="flex flex-col gap-6 p-10 px-20 w-4/5 m-auto"
     >
+      <ToastContainer />
       <div className="flex gap-10 items-center justify-start">
         <div className="flex flex-col gap-2">
           <label
@@ -266,6 +279,9 @@ const Profile = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           className="border-2 border-neutral-300 px-10 py-2 w-fit rounded-xl font-semibold text-lg"
+          onClick={() => {
+            window.location.href = "/password";
+          }}
         >
           Changer le mot de passe
         </motion.button>
@@ -275,7 +291,7 @@ const Profile = () => {
           className="bg-secondary px-10 py-2 text-white w-fit rounded-xl font-semibold text-lg"
           type="submit"
         >
-          Valider les mofiications
+          Valider les modifications
         </motion.button>
       </div>
     </form>

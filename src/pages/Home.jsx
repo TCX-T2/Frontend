@@ -6,6 +6,7 @@ import Historique from "../components/Historique.jsx";
 import AddPatient from "../components/AddPatient.jsx";
 import SideBar from "../components/Home/SideBar.jsx";
 import NavbarUser from "../components/Home/NavbarUser.jsx";
+import Password from "../components/Password.jsx";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -26,6 +27,8 @@ const Home = () => {
         return <Dashboard />;
       case "/profile":
         return <Profile />;
+      case "/password":
+        return <Password />;
       case "/historique":
         return <Historique />;
       case "/addpatient":
