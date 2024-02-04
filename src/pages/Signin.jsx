@@ -2,6 +2,8 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "../config/axiosConfig.js";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Signin = () => {
   const formik = useFormik({
@@ -29,34 +31,55 @@ const Signin = () => {
         })
         .catch((error) => {
           console.log(error.response);
-          if (error.response.status === 401) {
-            alert("Email ou mot de passe incorrect");
-          }
-          if (error.response.status === 500) {
-            alert("Erreur serveur");
-          }
-          if (error.response.status === 404) {
-            alert("Utilisateur non trouvé");
-          }
+          toast.error(error.response.data.message);
         });
     },
   });
 
+  // check if user is already logged in
+  if (localStorage.getItem("token")) {
+    // check if the token is still valid
+    axios
+      .get("users/verifyToken", {
+        headers: { "x-access-token": localStorage.getItem("token") },
+      })
+      .then((response) => {
+        window.location.href = "/dashboard";
+      })
+      .catch((error) => {
+        console.log(error.response);
+        localStorage.removeItem("token");
+      });
+  }
+
   return (
-    <div className=" h-screen w-screen flex ">
+    <div className=" h-screen w-screen flex relative">
+      <ToastContainer />
+      <div
+        className="flex items-center gap-5 p-4 absolute cursor-pointer"
+        onClick={() => {
+          window.location.href = "/";
+        }}
+      >
+        <img src="icowhite.svg" className="w-1/3" alt="" />
+        <h1 className="text-3xl text-white font-racingSansOne">Med Flow</h1>
+      </div>
       <div className="w-full bg-secondary flex justify-center items-center rounded-tr-3xl">
         <img
-          src="images/signin.svg"
+          src="images/doctorCheking.png"
           alt="img_illustartion_desk_pc"
-          className=" w-2/3 object-cover object-center"
+          className="w-7/12"
         />
       </div>
       <div className=" flex flex-col items-center justify-center w-11/12">
         <div className=" rounded-xl w-[27rem]">
-          <h2 className="text-4xl font-bold mb-5 text-center">
-            Bienvenu à MedFlow
+          <h2 className="text-3xl font-semibold mb-5 text-center">
+            Bienvenu à
           </h2>
-          <h2 className="text-xl font-semibold mb-5 text-center">
+          <h2 className="text-3xl mb-5 text-center font-racingSansOne text-secondary">
+            MedFlow
+          </h2>
+          <h2 className="text-3xl font-semibold mb-5 text-center">
             Connectez-vous
           </h2>
           <form onSubmit={formik.handleSubmit} className="flex flex-col gap-5">
@@ -70,7 +93,12 @@ const Signin = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.Username}
-                  className=" border rounded-md p-5 h-9 w-full"
+                  className={`border rounded-md p-5 h-9 w-full ${
+                    formik.touched.Username &&
+                    formik.errors.Username &&
+                    "border-red-500"
+                  }
+                    `}
                   placeholder="Entrez votre email ou userName"
                 />
               </div>
@@ -94,12 +122,16 @@ const Signin = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.password}
-                  className=" border rounded-md p-5 h-9 w-full"
+                  className={`border rounded-md p-5 h-9 w-full ${
+                    formik.touched.password &&
+                    formik.errors.password &&
+                    "border-red-500"
+                  }`}
                   placeholder="Entrer votre mot de passe"
                 />
                 <a
-                  href="/"
-                  className=" text-secondary text-xs  font-semibold absolute right-0 bottom-[-1.3rem]"
+                  href="/forgetpassword"
+                  className=" text-black text-xs  font-semibold absolute right-0 bottom-[-1.3rem] hover:text-secondary"
                 >
                   Mot de passe oublié ?
                 </a>
@@ -124,7 +156,7 @@ const Signin = () => {
                   onClick={() => {
                     window.location.href = "/signup";
                   }}
-                  className=" ml-3 font-semibold underline text-secondary hover:text-black transition duration-300 ease-in-out w-full"
+                  className=" ml-3 font-semibold underline text-black transition duration-300 ease-in-out w-full  cursor-pointer hover:text-secondary"
                 >
                   Inscrivez-vous
                 </span>

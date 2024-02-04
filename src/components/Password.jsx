@@ -131,6 +131,7 @@ const Password = () => {
             type="button"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
+            onClick={() => (window.location.href = "/forgetpassword")}
             className="border-2 border-neutral-300 px-10 py-2 w-fit rounded-xl font-semibold text-lg"
           >
             Mot de passe oublié?

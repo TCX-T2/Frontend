@@ -15,13 +15,11 @@ const SideBar = () => {
   return (
     <div className="h-full flex flex-col items-center justify-between w-1/5 border-r-2 py-6">
       <div className=" flex flex-col gap-20 w-full px-10">
-        <h2 className="text-4xl font-bold mb-5 text-center font-racingSansOne text-secondary flex gap-5 items-center justify-center">
-        <img
-            onClick={() => (window.location.href = "/")}
-            src="ico.svg"
-            alt="logo_MEDHUB"
-            className="cursor-pointer"
-          />
+        <h2
+          onClick={() => (window.location.href = "/")}
+          className="text-4xl font-bold mb-5 text-center font-racingSansOne text-secondary flex gap-5 items-center justify-center cursor-pointer"
+        >
+          <img src="ico.svg" alt="logo_MEDHUB" />
           MedFlow
         </h2>
         <ul className="flex flex-col gap-8 text-xl font-semibold mb-5 text-start">
@@ -45,7 +43,9 @@ const SideBar = () => {
           ${getClassNames("/profile")} ${getClassNames("/password")}`}
             >
               <img
-                src={`icons/profil${getCurrentWord("/profile")}${getCurrentWord("/password")}.svg`}
+                src={`icons/profil${getCurrentWord("/profile")}${getCurrentWord(
+                  "/password"
+                )}.svg`}
                 alt="profile icon"
               />
               <p>Profile</p>

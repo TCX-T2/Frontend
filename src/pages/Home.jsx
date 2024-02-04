@@ -7,6 +7,7 @@ import AddPatient from "../components/AddPatient.jsx";
 import SideBar from "../components/Home/SideBar.jsx";
 import NavbarUser from "../components/Home/NavbarUser.jsx";
 import Password from "../components/Password.jsx";
+import axios from "../config/axiosConfig.js";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -18,6 +19,20 @@ const Home = () => {
   useEffect(() => {
     if (!token) {
       navigate("/signin");
+    } else {
+      // check if the token is still valid
+      axios
+        .get("users/verifyToken", {
+          headers: { "x-access-token": localStorage.getItem("token") },
+        })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error.response);
+          localStorage.removeItem("token");
+          window.location.href = "/signin";
+        });
     }
   }, [token, navigate]);
 
