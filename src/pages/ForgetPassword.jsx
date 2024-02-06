@@ -1,4 +1,4 @@
-import Navbar from "../components/Hero/Navbar";
+import Navbar from "../components/LandingPage/Navbar.jsx";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "../config/axiosConfig.js";

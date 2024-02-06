@@ -1,4 +1,4 @@
-import axiosInstance from "../../config/axiosConfig.js";
+import axiosInstance from "../../../config/axiosConfig.js";
 
 const NavbarUser = () => {
   // get user name from local storage

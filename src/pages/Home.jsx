@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Dashboard from "../components/Dashboard.jsx";
-import Profile from "../components/Profile.jsx";
-import Historique from "../components/Historique.jsx";
-import AddPatient from "../components/AddPatient.jsx";
-import SideBar from "../components/Home/SideBar.jsx";
-import NavbarUser from "../components/Home/NavbarUser.jsx";
-import Password from "../components/Password.jsx";
+import Dashboard from "../components/Home/Dashboard/Dashboard.jsx";
+import Profile from "../components/Home/Profile/Profile.jsx";
+import Historique from "../components/Home/History/Historique.jsx";
+import AddPatient from "../components/Home/Dashboard/AddPatient.jsx";
+import SideBar from "../components/Home/UI/SideBar.jsx";
+import NavbarUser from "../components/Home/UI/NavbarUser.jsx";
+import Password from "../components/Home/Profile/Password.jsx";
 import axios from "../config/axiosConfig.js";
 
 const Home = () => {

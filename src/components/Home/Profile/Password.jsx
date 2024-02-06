@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axiosInstance from "../config/axiosConfig.js";
+import axiosInstance from "../../../config/axiosConfig.js";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import BackButton from "./BackButton.jsx";
+import BackButton from "../UI/BackButton.jsx";
 
 const Password = () => {
   const token = localStorage.getItem("token");

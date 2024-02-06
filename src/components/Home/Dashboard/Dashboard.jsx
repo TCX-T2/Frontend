@@ -1,5 +1,5 @@
 import React from "react";
-import axiosInstance from "../config/axiosConfig.js";
+import axiosInstance from "../../../config/axiosConfig.js";
 
 const Dashboard = () => {
   const [patients, setPatients] = React.useState([]);

@@ -1,4 +1,4 @@
-import axios from "../../config/axiosConfig.js";
+import axios from "../../../config/axiosConfig.js";
 
 const pageActive = window.location.pathname;
 
@@ -26,11 +26,11 @@ const SideBar = () => {
           <a href="/dashboard">
             <li
               className={`rounded-xl w-full py-3 px-5 hover:bg-secondary hover:bg-opacity-10 transition-all duration-200 flex gap-4
-          ${getClassNames("/dashboard")}`}
+          ${getClassNames("/dashboard")} ${getClassNames("/addpatient")}`}
               id="dashboard"
             >
               <img
-                src={`icons/dashboard${getCurrentWord("/dashboard")}.svg`}
+                src={`icons/dashboard${getCurrentWord("/dashboard")}${getCurrentWord("/addpatient")}.svg`}
                 alt="dashboard icon"
               />
               <p>Dashboard</p>

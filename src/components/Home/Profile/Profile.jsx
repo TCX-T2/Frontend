@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axiosInstance from "../config/axiosConfig.js";
+import axiosInstance from "../../../config/axiosConfig.js";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
