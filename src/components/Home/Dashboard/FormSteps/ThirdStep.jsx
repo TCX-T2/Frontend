@@ -13,34 +13,46 @@ const ThirdStep = ({ formData, onBack }) => {
     initialValues: {
       visitdate: "",
       rendezvous: "",
-      bilan: null,
-      images: null,
+      bilans: null,
+      photos: null,
     },
     validationSchema: Yup.object({
       visitdate: Yup.string().required("Date de Visite est obligatoire"),
       rendezvous: Yup.string().required("Prochain Rendez-vous est obligatoire"),
-      bilan: Yup.mixed().test(
+      bilans: Yup.mixed().test(
         "fileSize",
-        "Bilan should be less than 5MB",
-        (value) => value === null || value.size <= 5000000
+        "Bilan should be less than 2MB",
+        (value) => value === null || value.size <= 2000000
       ),
-      images: Yup.mixed()
-        .test("fileType", "Only images are allowed", (value) => {
+      photos: Yup.mixed()
+        .test("fileType", "Only photos are allowed", (value) => {
           return value === null || value.type.startsWith("image/");
         })
-        .test("fileSize", "Images should be less than 5MB", (value) => {
-          return value === null || value.size <= 5000000;
+        .test("fileSize", "Images should be less than 2MB", (value) => {
+          return value === null || value.size <= 2000000;
         }),
     }),
     onSubmit: async (values, { setSubmitting }) => {
       try {
-        const formData = new FormData();
-        formData.append("visitdate", values.visitdate);
-        formData.append("rendezvous", values.rendezvous);
-        formData.append("bilan", values.bilan);
-        formData.append("images", values.images);
+        const combinedData = { ...formData, ...values };
+        const sendData = new FormData();
+        sendData.append("Nom_p", combinedData.Nom);
+        sendData.append("Prenom_p", combinedData.Prenom);
+        sendData.append("Date_naissance", combinedData.birthdate);
+        sendData.append("Phone", combinedData.numerotel);
+        sendData.append("email", combinedData.Adressemail);
+        sendData.append("Sexe", combinedData.sexe);
+        sendData.append("SituationFamiliale", combinedData.situationfamiliale);
+        sendData.append("Antecedants", combinedData.Antecedants);
+        sendData.append("MotifConsultation", combinedData.motifconsultaion);
+        sendData.append("Medicaments", combinedData.Medicaments);
+        sendData.append("CompteRendu", combinedData.compterendu);
+        sendData.append("DateVisite", combinedData.visitdate);
+        sendData.append("DateProchaineRendezVous", combinedData.rendezvous);
+        sendData.append("bilans", combinedData.bilans);
+        sendData.append("images", combinedData.photos);
 
-        const response = await axiosInstance.post("/patients/add", formData, {
+        const response = await axiosInstance.post("/patients/add", sendData, {
           headers: {
             "Content-Type": "multipart/form-data",
             "x-access-token": token,
@@ -48,6 +60,10 @@ const ThirdStep = ({ formData, onBack }) => {
         });
 
         toast.success(response.data.message);
+        // wait for 2 seconds before redirecting to the dashboard
+        setTimeout(() => {
+          window.location.href = "/dashboard";
+        }, 2000);
       } catch (error) {
         console.error(error);
         toast.error("An error occurred while submitting the form.");
@@ -61,6 +77,7 @@ const ThirdStep = ({ formData, onBack }) => {
     <form
       onSubmit={formik.handleSubmit}
       className="flex flex-col gap-6 p-10 px-20 w-4/5 m-auto relative"
+      encType="multipart/form-data"
     >
       <ToastContainer />
       <img
@@ -121,19 +138,19 @@ const ThirdStep = ({ formData, onBack }) => {
       {/* Bilan File Upload */}
       <div className="flex flex-col gap-2">
         <label
-          htmlFor="bilan"
+          htmlFor="bilans"
           className={`${
-            formik.touched.bilan && formik.errors.bilan ? "text-red-500" : ""
+            formik.touched.bilans && formik.errors.bilans ? "text-red-500" : ""
           }`}
         >
-          {formik.touched.bilan && formik.errors.bilan
-            ? formik.errors.bilan
+          {formik.touched.bilans && formik.errors.bilans
+            ? formik.errors.bilans
             : "Bilan"}
         </label>
         <input
           type="file"
-          name="bilan"
-          onChange={(e) => formik.setFieldValue("bilan", e.target.files[0])} // Handle file change
+          name="bilans"
+          onChange={(e) => formik.setFieldValue("bilans", e.target.files[0])} // Handle file change
           onBlur={formik.handleBlur}
           className="border-[1.5px] border-neutral-300 w-full rounded-md p-3 h-14 outline-none focus:outline-none focus:ring-2 focus:ring-secondary"
         />
@@ -142,20 +159,20 @@ const ThirdStep = ({ formData, onBack }) => {
       {/* Images File Upload */}
       <div className="flex flex-col gap-2">
         <label
-          htmlFor="images"
+          htmlFor="photos"
           className={`${
-            formik.touched.images && formik.errors.images ? "text-red-500" : ""
+            formik.touched.photos && formik.errors.photos ? "text-red-500" : ""
           }`}
         >
-          {formik.touched.images && formik.errors.images
-            ? formik.errors.images
+          {formik.touched.photos && formik.errors.photos
+            ? formik.errors.photos
             : "Images"}
         </label>
         <input
           type="file"
-          name="images"
-          accept="image/*" // Allow only images
-          onChange={(e) => formik.setFieldValue("images", e.target.files[0])} // Handle file change
+          name="photos"
+          accept="image/*" // Allow only photos
+          onChange={(e) => formik.setFieldValue("photos", e.target.files[0])} // Handle file change
           onBlur={formik.handleBlur}
           className="border-[1.5px] border-neutral-300 w-full rounded-md p-3 h-14 outline-none focus:outline-none focus:ring-2 focus:ring-secondary"
         />

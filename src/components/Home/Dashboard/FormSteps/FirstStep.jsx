@@ -156,7 +156,7 @@ const FirstStep = ({ onNext }) => {
             onBlur={formik.handleBlur}
             className="border-[1.5px] border-neutral-300 w-[24.5rem] rounded-md outline-none focus:outline-none focus:ring-2 focus:ring-secondary h-12 p-3"
           >
-            <option value="" label="Sexe" selected disabled hidden />
+            <option value="" label="Sexe" hidden />
             <option value="Homme" label="Homme" />
             <option value="Femme" label="Femme" />
           </select>
@@ -209,8 +209,8 @@ const FirstStep = ({ onNext }) => {
             onBlur={formik.handleBlur}
             className=" border-[1.5px] border-neutral-300 w-[24.5rem] rounded-md  h-12 p-3 outline-none focus:outline-none focus:ring-2 focus:ring-secondary"
           >
-            <option value="" label="Situation familiale" selected disabled hidden />
-            <option value="Célibatiare">Célibatiare</option>
+            <option value="" label="Situation familiale" hidden />
+            <option value="Célibataire">Célibataire</option>
             <option value="Marié">Marié</option>
             <option value="Divorcé">Divorcé</option>
           </select>
