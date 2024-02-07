@@ -15,8 +15,8 @@ const ThirdStep = ({ formData, onBack }) => {
 
   const formik = useFormik({
     initialValues: {
-      visitdate: "",
-      rendezvous: "",
+      visitdate: formData.visitdate || "",
+      rendezvous: formData.rendezvous || "",
       bilans: [],
       photos: [],
     },
@@ -236,7 +236,12 @@ const ThirdStep = ({ formData, onBack }) => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           className="border-2 border-neutral-300 px-10 py-2 w-fit rounded-xl font-semibold text-lg"
-          onClick={() => onBack()}
+          onClick={() => {
+            // manually updating the formData with the current value of the fields
+            formData.visitdate = formik.values.visitdate;
+            formData.rendezvous = formik.values.rendezvous;
+            onBack();
+          }}
         >
           Previous
         </motion.button>

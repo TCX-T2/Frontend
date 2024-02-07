@@ -2,13 +2,13 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { motion } from "framer-motion";
 
-const FirstStep = ({ onNext, onBack }) => {
+const FirstStep = ({ formData, onNext, onBack }) => {
   const formik = useFormik({
     initialValues: {
-      Antecedants: "",
-      Medicaments: "",
-      compterendu: "",
-      motifconsultaion: "",
+      Antecedants: formData.Antecedants || "",
+      Medicaments: formData.Medicaments || "",
+      compterendu: formData.compterendu || "",
+      motifconsultaion: formData.motifconsultaion || "",
     },
 
     validationSchema: Yup.object({
@@ -137,7 +137,14 @@ const FirstStep = ({ onNext, onBack }) => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           className="border-2 border-neutral-300 px-10 py-2 w-fit rounded-xl font-semibold text-lg"
-          onClick={() => onBack(1)}
+          onClick={() => {
+            // manually updating the formData with the current value of the fields
+            formData.Antecedants = formik.values.Antecedants;
+            formData.Medicaments = formik.values.Medicaments;
+            formData.compterendu = formik.values.compterendu;
+            formData.motifconsultaion = formik.values.motifconsultaion;
+            onBack(1);
+          }}
         >
           Precédent
         </motion.button>

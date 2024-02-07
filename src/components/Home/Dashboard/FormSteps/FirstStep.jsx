@@ -2,16 +2,16 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { motion } from "framer-motion";
 
-const FirstStep = ({ onNext }) => {
+const FirstStep = ({ formData, onNext }) => {
   const formik = useFormik({
     initialValues: {
-      Nom: "",
-      Prenom: "",
-      Adressemail: "",
-      numerotel: "",
-      sexe: "", // Set default value to empty string
-      birthdate: "",
-      situationfamiliale: "",
+      Nom: formData.Nom || "",
+      Prenom: formData.Prenom || "",
+      Adressemail: formData.Adressemail || "",
+      numerotel: formData.numerotel || "",
+      sexe: formData.sexe || "",
+      birthdate: formData.birthdate || "",
+      situationfamiliale: formData.situationfamiliale || "",
     },
 
     validationSchema: Yup.object({
