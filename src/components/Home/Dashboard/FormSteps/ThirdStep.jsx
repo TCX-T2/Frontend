@@ -5,37 +5,33 @@ import { motion } from "framer-motion";
 import axiosInstance from "../../../../config/axiosConfig.js";
 import { toast, ToastContainer } from "react-toastify";
 import { useState } from "react";
+import Dropzone from "react-dropzone-uploader";
+import "react-dropzone-uploader/dist/styles.css";
 
 const ThirdStep = ({ formData, onBack }) => {
   const token = localStorage.getItem("token");
+  const [isUpdatePreview, setIsUpdatePreview] = useState(false);
+  const sendData = new FormData();
 
   const formik = useFormik({
     initialValues: {
       visitdate: "",
       rendezvous: "",
-      bilans: null,
-      photos: null,
+      bilans: [],
+      photos: [],
     },
     validationSchema: Yup.object({
       visitdate: Yup.string().required("Date de Visite est obligatoire"),
       rendezvous: Yup.string().required("Prochain Rendez-vous est obligatoire"),
-      bilans: Yup.mixed().test(
-        "fileSize",
-        "Bilan should be less than 2MB",
-        (value) => value === null || value.size <= 2000000
-      ),
-      photos: Yup.mixed()
-        .test("fileType", "Only photos are allowed", (value) => {
-          return value === null || value.type.startsWith("image/");
-        })
-        .test("fileSize", "Images should be less than 2MB", (value) => {
-          return value === null || value.size <= 2000000;
-        }),
+      bilans: Yup.array().required("Bilan est obligatoire").max(5, "Maximum 5"),
+      photos: Yup.array()
+        .required("Images est obligatoire")
+        .max(5, "Maximum 5"),
     }),
     onSubmit: async (values, { setSubmitting }) => {
       try {
         const combinedData = { ...formData, ...values };
-        const sendData = new FormData();
+
         sendData.append("Nom_p", combinedData.Nom);
         sendData.append("Prenom_p", combinedData.Prenom);
         sendData.append("Date_naissance", combinedData.birthdate);
@@ -49,8 +45,14 @@ const ThirdStep = ({ formData, onBack }) => {
         sendData.append("CompteRendu", combinedData.compterendu);
         sendData.append("DateVisite", combinedData.visitdate);
         sendData.append("DateProchaineRendezVous", combinedData.rendezvous);
-        sendData.append("bilans", combinedData.bilans);
-        sendData.append("images", combinedData.photos);
+
+        combinedData.bilans.forEach((bilan) => {
+          sendData.append("bilans", bilan);
+        });
+
+        combinedData.photos.forEach((photo) => {
+          sendData.append("images", photo);
+        });
 
         const response = await axiosInstance.post("/patients/add", sendData, {
           headers: {
@@ -72,6 +74,20 @@ const ThirdStep = ({ formData, onBack }) => {
       }
     },
   });
+
+  // Define the callback to handle file upload status change
+  const handleUploadStatusChange = (file, status, formDataKey) => {
+    setIsUpdatePreview(!isUpdatePreview);
+    if (status === "done") {
+      formik.values[formDataKey].push(file.file);
+    }
+
+    if (status === "removed") {
+      formik.values[formDataKey] = formik.values[formDataKey].filter(
+        (item) => item !== file.file
+      );
+    }
+  };
 
   return (
     <form
@@ -147,12 +163,30 @@ const ThirdStep = ({ formData, onBack }) => {
             ? formik.errors.bilans
             : "Bilan"}
         </label>
-        <input
-          type="file"
-          name="bilans"
-          onChange={(e) => formik.setFieldValue("bilans", e.target.files[0])} // Handle file change
-          onBlur={formik.handleBlur}
-          className="border-[1.5px] border-neutral-300 w-full rounded-md p-3 h-14 outline-none focus:outline-none focus:ring-2 focus:ring-secondary"
+        <Dropzone
+          inputContent="Drop or click to upload bilans"
+          onChangeStatus={(file, status) => {
+            handleUploadStatusChange(file, status, "bilans");
+          }}
+          accept="image/*,text/*,application/pdf, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          maxFiles={10}
+          inputWithFilesContent="Add more"
+          styles={{
+            dropzone: {
+              border: "2px dashed #eaeaea",
+              borderRadius: "10px",
+              width: "100%",
+              minHeight: "100px",
+              maxHeight: "200px",
+              overflowX: "auto",
+              overflowY: "auto",
+            },
+            inputLabel: {
+              color: "#666",
+              fontSize: "16px",
+              fontWeight: "bold",
+            },
+          }}
         />
       </div>
 
@@ -168,13 +202,30 @@ const ThirdStep = ({ formData, onBack }) => {
             ? formik.errors.photos
             : "Images"}
         </label>
-        <input
-          type="file"
-          name="photos"
-          accept="image/*" // Allow only photos
-          onChange={(e) => formik.setFieldValue("photos", e.target.files[0])} // Handle file change
-          onBlur={formik.handleBlur}
-          className="border-[1.5px] border-neutral-300 w-full rounded-md p-3 h-14 outline-none focus:outline-none focus:ring-2 focus:ring-secondary"
+        <Dropzone
+          inputContent="Drop or click to upload images"
+          onChangeStatus={(file, status) => {
+            handleUploadStatusChange(file, status, "photos");
+          }}
+          accept="image/*"
+          maxFiles={10}
+          inputWithFilesContent="Add more"
+          styles={{
+            dropzone: {
+              border: "2px dashed #eaeaea",
+              borderRadius: "10px",
+              width: "100%",
+              minHeight: "100px",
+              maxHeight: "200px",
+              overflowX: "auto",
+              overflowY: "auto",
+            },
+            inputLabel: {
+              color: "#666",
+              fontSize: "16px",
+              fontWeight: "bold",
+            },
+          }}
         />
       </div>
 
