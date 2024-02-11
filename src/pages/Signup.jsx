@@ -12,7 +12,7 @@ const Signup = () => {
   const validationSchema = Yup.object({
     Nom: Yup.string().required("Nom est requis"),
     Prenom: Yup.string().required("Prenom est requis"),
-    email: Yup.string().email("Email invalide").required("Email est requis"),
+    mail: Yup.string().email("Email invalide").required("Email est requis"),
     PhoneNumber: Yup.number("Numéro de téléphone invalide").required(
       "Numéro de téléphone est requis"
     ),
@@ -27,7 +27,7 @@ const Signup = () => {
     initialValues: {
       Nom: "",
       Prenom: "",
-      email: "",
+      mail: "",
       PhoneNumber: "",
       Username: "",
       Specialite: "",
@@ -36,7 +36,7 @@ const Signup = () => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       axios
-        .post("/signup", values)
+        .post("/users/signup", values)
         .then((response) => {
           console.log(response.data); // Handle successful response here
           localStorage.setItem("token", response.data.accessToken);
@@ -163,28 +163,27 @@ const Signup = () => {
             </div>
             <div>
               <label
-                htmlFor="email"
+                htmlFor="mail"
                 className={`text-sm ${
-                  formik.touched.email && formik.errors.email
+                  formik.touched.mail && formik.errors.mail
                     ? "text-red-500"
                     : ""
                 }`}
               >
-                {formik.touched.email && formik.errors.email
-                  ? formik.errors.email
+                {formik.touched.mail && formik.errors.mail
+                  ? formik.errors.mail
                   : "Addresse mail"}
               </label>
               <input
                 type="email"
-                id="email"
-                name="email"
+                name="mail"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 placeholder="Entrez votre email"
-                value={formik.values.email}
+                value={formik.values.mail}
                 className={`mt-2 border border-gray-400 rounded-md p-5 h-9 w-full ${
-                  formik.touched.email &&
-                  formik.errors.email &&
+                  formik.touched.mail &&
+                  formik.errors.mail &&
                   "border-red-500"
                 }`}
               />
