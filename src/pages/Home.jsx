@@ -4,6 +4,7 @@ import Dashboard from "../components/Home/Dashboard/Dashboard.jsx";
 import Profile from "../components/Home/Profile/Profile.jsx";
 import Historique from "../components/Home/History/Historique.jsx";
 import AddPatient from "../components/Home/Dashboard/AddPatient.jsx";
+import Patient from "../components/Home/Dashboard/Patient.jsx";
 import SideBar from "../components/Home/UI/SideBar.jsx";
 import NavbarUser from "../components/Home/UI/NavbarUser.jsx";
 import Password from "../components/Home/Profile/Password.jsx";
@@ -13,7 +14,7 @@ const Home = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
-  const pageActive = window.location.pathname;
+  let pageActive = window.location.pathname;
 
   // Redirect if the user is not logged in
   useEffect(() => {
@@ -37,17 +38,21 @@ const Home = () => {
   }, [token, navigate]);
 
   const getComponent = () => {
+    pageActive = pageActive.split("/")[1];
+    console.log(pageActive);
     switch (pageActive) {
-      case "/dashboard":
+      case "dashboard":
         return <Dashboard />;
-      case "/profile":
+      case "profile":
         return <Profile />;
-      case "/password":
+      case "password":
         return <Password />;
-      case "/historique":
+      case "historique":
         return <Historique />;
-      case "/addpatient":
+      case "addpatient":
         return <AddPatient />;
+      case "patient":
+        return <Patient />;
       default:
         return <Dashboard />;
     }

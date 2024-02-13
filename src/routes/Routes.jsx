@@ -16,6 +16,7 @@ const Routers = () => {
       <Route path="/dashboard" element={<Home />}></Route>
       <Route path="/historique" element={<Home />}></Route>
       <Route path="/addpatient" element={<Home />}></Route>
+      <Route path="/patient/:id" element={<Home />}></Route>
       <Route path="/profile" element={<Home />}></Route>
       <Route path="/password" element={<Home />}></Route>
       <Route path="/forgetpassword" element={<ForgetPassword />}></Route>

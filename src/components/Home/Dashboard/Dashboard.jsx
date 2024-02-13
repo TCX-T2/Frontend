@@ -99,14 +99,16 @@ const Dashboard = () => {
                   key={patient._id}
                   className="border-b-2 border-gray-200 text-sm font-semibold cursor-pointer hover:bg-gray-50 transition-all duration-200"
                   onClick={() => {
-                    window.location.href = `/patient/${patient._id}`;
+                    window.location.href = `/patient/:${patient._id}`;
                   }}
                 >
                   <td className="py-5">
                     {patient.Nom_p} {patient.Prenom_p}
                   </td>
                   <td className="py-5">{patient.Sexe}</td>
-                  <td className="py-5">{patient.Date_naissance}</td>
+                  <td className="py-5">
+                    {patient.Date_naissance.split("T")[0]}
+                  </td>
                   <td className="py-5">{patient.Phone}</td>
                   <td className="py-5">
                     <button

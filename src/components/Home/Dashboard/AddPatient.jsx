@@ -21,9 +21,6 @@ const AddPatient = () => {
   return (
     <>
       <BackButton />
-      {/* {step === 1 && <FirstStep onNext={handleNext} />}
-      {step === 2 && <SecondStep onNext={handleNext} onBack={handleBack} />}
-      {step === 3 && <ThirdStep formData={formData} onBack={handleBack} />} */}
 
       {step === 1 && <FirstStep formData={formData} onNext={handleNext} />}
       {step === 2 && (
